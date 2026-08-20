@@ -1,0 +1,249 @@
+{
+  "solicitudes": [
+    {
+      "id": 1,
+      "empresa": "BioMedica CR S.A.",
+      "sector": "Ciencias de la Vida",
+      "sectorCodigo": "C21",
+      "zonaFranca": "Zona Franca Coyol",
+      "estado": "Aprobada",
+      "fechaSolicitud": "2025-11-03",
+      "fechaResolucion": "2025-11-25",
+      "fechaEnvio": "2025-11-10",
+      "scoreIA": 87,
+      "tiempoRespuestaDias": 22,
+      "inversionAnual": 600000,
+      "empleosMeta": 120,
+      "exportacionesAnuales": 2800000,
+      "nacionalidadMin": 30,
+      "mujeresMin": 20,
+      "decision": "Aprobada",
+      "historial": [
+        { "tipo": "solicitud", "fecha": "2025-11-03", "descripcion": "Solicitud de ingreso recibida con expediente completo.", "estado": "Recibida" },
+        { "tipo": "score-ia", "fecha": "2025-11-10", "descripcion": "Score IA de elegibilidad: 87/100. Riesgo bajo. Cumple umbrales RA-01, RA-05, RA-08.", "estado": "Evaluación IA" },
+        { "tipo": "decision", "fecha": "2025-11-25", "descripcion": "Comité aprueba ingreso. Compromiso de inversión $600.000/año y 120 empleos.", "estado": "Aprobada" }
+      ]
+    },
+    {
+      "id": 2,
+      "empresa": "Innovatech Software Inc.",
+      "sector": "Servicios de Alto Valor Agregado",
+      "sectorCodigo": "J62",
+      "zonaFranca": "Zona Franca América (Alajuela)",
+      "estado": "Aprobada",
+      "fechaSolicitud": "2025-08-18",
+      "fechaResolucion": "2025-09-08",
+      "responsabilidadEnvio": "2025-08-25",
+      "scoreIA": 91,
+      "tiempoRespuestaDias": 21,
+      "inversionAnual": 420000,
+      "empleosAnual": 95,
+      "exportacionesAnuales": 1500000,
+      "historial": [
+        { "tipo": "solicitud", "fecha": "2025-08-18", "descripcion": "Solicitud recibida con plan de inversión servicio informático.", "estado": "Recibida" },
+        { "tipo": "score-ia", "fecha": "2025-08-25", "descripcion": "Score IA 91/100. Cumple RA-02, RA-08 (sector J62 dentro de lista positiva).", "estado": "Evaluado" },
+        { "tipo": "decision", "fecha": "2025-09-08", "descripcion": "Aprobada con carta de compromiso firmada.", "estado": "Aprobada" }
+      ]
+    },
+    {
+      "id": 3,
+      "empresa": "TropITm Portafolio S.A.",
+      "sector": "Manufactura de Dispositivos Médicos",
+      "sectorCodigo": "C26",
+      "zonaFranca": "Zona Franca Heredia",
+      "estado": "En Revisión",
+      "fechaSolicitud": "2026-01-12",
+      "fechaResolucion": null,
+      "inversionAnual": 780500,
+      "empleosAnual": 210,
+      "exportacionesAnuales": 4200000,
+      "historial": [
+        { "tipo": "solicitud", "fecha": "2026-01-12", "descripcion": "Expediente completo en revisión técnica.", "estado": "Recibida" },
+        { "tipo": "score-ia", "fecha": "2026-01-18", "descripcion": "Score IA 74/100. Pendiente verificación de cumplimiento RA-09 (antecedentes).", "estado": "Evaluado" },
+        { "tipo": "obs", "fecha": "2026-01-22", "descripcion": "Se solicita justificación de flexibilidad por 15% en inversión (RA-04).", "estado": "En Revisión" }
+      ]
+    },
+    {
+      "id": 4,
+      "empresa": "GreenLogix CR Logistics",
+      "sector": "Logística",
+      "sectorCodigo": "I52",
+      "zonaFranca": "Zona Franca Cartago",
+      "estado": "Pendiente",
+      "fechaSolicitud": "2026-02-01",
+      "fechaResolucion": null,
+      "inversionAnual": 150000,
+      "empleosAnual": 28,
+      "exportacionesAnuales": 350000,
+      "historial": [
+        { "tipo": "solicitud", "fecha": "2026-02-01", "descripcion": "Solicitud en espera de completar documentación.", "estado": "Pendiente" }
+      ]
+    },
+    {
+      "id": 5,
+      "empresa": "Soluciones Andinas S.A.",
+      "sector": "I+D",
+      "sectorCodigo": "M72",
+      "zonaFranca": "Zona Franca San Carlos",
+      "estado": "Rechazada",
+      "fechaSolicitud": "2025-10-05",
+      "fechaResolucion": "2025-10-16",
+      "inversionAnualR": 80000,
+      "empleosAnual": 9,
+      "exportacionesAnuales": 120000,
+      "historial": [
+        { "tipo": "solicitud", "fecha": "2025-10-05", "descripcion": "Solicitud recibida, sector I+D.", "estado": "Recibida" },
+        { "tipo": "score-ia", "fecha": "2025-10-09", "descripcion": "Score IA 42/100: no cumple RA-05 (mínimo 10 empleos).", "estado": "Evaluado" },
+        { "tipo": "decision", "fecha": "2025-10-16", "descripcion": "Rechazada por incumplir umbral de empleo (RA-05).", "estado": "Rechazada" }
+      ]
+    },
+    {
+      "id": 6,
+      "empresa": "FreshFruit Exports CR",
+      "sector": "Agroindustria",
+      "sectorCodigo": "A01",
+      "zonaFranca": "Zona Franca Limón",
+      "estado": "Aprobada",
+      "fechaSolicitud": "2025-05-12",
+      "fechaResolucion": "2025-05-28",
+      "scoreIA": 68,
+      "tiempoRespuestaDias": 16,
+      "inversionAnual": 270000,
+      "empleosAnual": 62,
+      "exportacionesAnuales": 950000,
+      "historial": [
+        { "tipo": "solicitud", "fecha": "2025-05-12", "descripcion": "Expediente agroindustrial recibido.", "estado": "Recibida" },
+        { "tipo": "score-ia", "fecha": "2025-05-19", "descripcion": "Score IA 68/100: cumple umbrales mínimos.", "estado": "Evaluado" },
+        { "tipo": "decision", "fecha": "2025-05-28", "descripcion": "Aprobada con condiciones de reporte trimestral estricto.", "estado": "Aprobada" }
+      ]
+    }
+  ],
+  "reportesCumplimiento": [
+    {
+      "id": 1,
+      "empresaId": 1,
+      "empresa": "BioMedica CR S.A.",
+      "periodo": "2026-Q1",
+      "trimestre": 1,
+      "ano": 2026,
+      "inversionReal": 552000,
+      "empleosReal": 118,
+      "exportacionesReal": 1340000,
+      "fechaEnvio": "2026-04-12",
+      "recibido": true,
+      "notas": "Compromiso de inversión cumplido; ligera variación por tipo de cambio."
+    },
+    {
+      "id": 2,
+      "empresaId": 2,
+      "empresa": "Innovatech Software Inc.",
+      "periodo": "2026-Q1",
+      "trimestre": 1,
+      "ano": 2026,
+      "inversionReal": 368000,
+      "empleosReal": 87,
+      "exportacionesReal": 1280000,
+      "fechaEnvio": "2026-04-06",
+      "recibido": true,
+      "notas": "Dentro de meta. Equipo ampliado en desarrollo."
+    },
+    {
+      "id": 3,
+      "empresaId": 6,
+      "empresa": "FreshFruit Exports CR",
+      "periodo": "2026-Q1",
+      "trimestre": 1,
+      "ano": 2026,
+      "inversionReal": 214000,
+      "empleosReal": 55,
+      "exportacionesReal": 780000,
+      "fechaEnvio": "2026-04-10",
+      "recibido": true,
+      "notas": "Menor volumen por estacionalidad."
+    },
+    {
+      "id": 4,
+      "empresaId": 2,
+      "empresa": "Innovatech Software Inc.",
+      "periodo": "2025-Q4",
+      "trimestre": 4,
+      "ano": 2025,
+      "inversionReal": 0,
+      "empleosReal": 0,
+      "exportacionesReal": 0,
+      "fechaEnvio": null,
+      "recibido": false,
+      "notas": "Reporte no recibido en plazo (RC-07)."
+    },
+    {
+      "id": 5,
+      "empresaId": 3,
+      "empresa": "TropITm Portafolio S.A.",
+      "periodo": "2026-Q1",
+      "trimestre": 1,
+      "ano": 2026,
+      "inversionReal": 505000,
+      "empleosReal": 172,
+      "exportacionesReal": 2620000,
+      "fechaEnvio": "2026-04-14",
+      "recibido": true,
+      "notas": "Invierte por encima de meta; empleos debajo."
+    },
+    {
+      "id": 6,
+      "empresaId": 4,
+      "empresa": "GreenLogix CR Logistics",
+      "periodo": "2026-Q1",
+      "trimestre": 1,
+      "ano": 2026,
+      "inversionReal": 29500,
+      "empleosReal": 9,
+      "exportacionesReal": 110000,
+      "fechaEnvio": "2026-04-24",
+      "recibido": true,
+      "notas": "Desviación severa de inversión y empleo: plan correctivo."
+    },
+    {
+      "id": 7,
+      "empresaId": 6,
+      "empresa": "FreshFruit Exports CR",
+      "periodo": "2025-Q4",
+      "trimestre": 4,
+      "ano": 2025,
+      "inversionReal": 46000,
+      "empleosReal": 11,
+      "exportacionesReal": 410000,
+      "fechaEnvio": "2026-01-22",
+      "recibido": true,
+      "notas": "Se rescatan datos del trimestre anterior."
+    },
+    {
+      "id": 8,
+      "empresaId": 1,
+      "empresa": "BioMedica CR S.A.",
+      "periodo": "2025-Q4",
+      "trimestre": 4,
+      "ano": 2025,
+      "inversionReal": 572000,
+      "empleosReal": 121,
+      "exportacionesReal": 1320000,
+      "fechaEnvio": "2026-01-12",
+      "recibido": true,
+      "notas": "En regla."
+    },
+    {
+      "id": 9,
+      "empresaId": 5,
+      "empresa": "Soluciones Andinas S.A.",
+      "periodo": "2026-Q1",
+      "trimestre": 1,
+      "ano": 2026,
+      "inversionReal": 62500,
+      "empleosReal": 6,
+      "exportacionesReal": 98000,
+      "fechaEnvio": null,
+      "recibido": false,
+      "notas": "ROJO — reporte no presentado al día 25 post-trimestre."
+    }
+  ]
+}

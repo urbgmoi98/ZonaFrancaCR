@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FranCat CR ✦ Reporte Trimestral de Cumplimiento</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/css/webcore.css" />
+  </head>
+  <body>
+    <!-- Navegación pixel -->
+    <nav class="web-nav">
+      <a class="nav-brand" href="/">
+        <span>🩷</span> Fran<b>Cat</b><span> CR</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">Dashboard</a>
+        <a class="is-active" href="/reporte.html">Reporte 📋</a>
+        <a href="/alertas.html">Alertas 🚨</a>
+      </div>
+      <div class="nav-stamp">★ ZONA FRANCA · MÓDULO 2 ★</div>
+    </nav>
+
+    <!-- Marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>✦ REPORTE TRIMESTRAL DE CUMPLIMIENTO ✦</span>
+        <span>💖 INVERSIÓN REAL ✦ EMPLEOS ACTIVOS ✦ EXPORTACIONES 💖</span>
+        <span>✦ PROCOMER WATCH✦</span>
+        <span>💖 ENVÍA ANTES DEL DÍA 15 POST-TRIMESTRE 💖</span>
+        <span>✦ REPORTE TRIMESTRAL DE CUMPLIMIENTO ✦</span>
+        <span>💖 INVERSIÓN REAL ✦ EMPLEOS ACTIVOS ✦ EXPORTACIONES 💖</span>
+        <span>✦ PROCOMER WATCH✦</span>
+        <span>💖 ENVÍA ANTES DEL DÍA 15 POST-TRIMESTRE 💖</span>
+      </div>
+    </div>
+
+    <main class="module-page">
+      <div class="page-wrap">
+        <h1 class="section-title">
+          <span>📋 Reporte Trimestral de Cumplimiento</span>
+          <span class="title-stamp">RF-06</span>
+        </h1>
+
+        <!-- Form card -->
+        <div class="y2k-card pink-fill">
+          <div class="card-title">
+            <span>✨ Formulario de Cumplimiento — FranCat CR</span>
+            <span class="pill pill-blue">Empresa Instalada</span>
+          </div>
+
+          <form id="reporteForm" novalidate>
+            <div class="form-grid">
+              <!-- Empresa -->
+              <div class="form-field full">
+                <label class="form-label" for="empresa">🏢 Empresa</label>
+                <select id="empresa" name="empresa" required>
+                  <option value="">— Selecciona tu empresa —</option>
+                  <option value="1">BioMedica CR S.A.</option>
+                  <option value="2">Innovatech Software Inc.</option>
+                  <option value="3">TropITm Portafolio S.A.</option>
+                  <option value="4">GreenLogix CR Logistics</option>
+                  <option value="5">Soluciones Andinas S.A.</option>
+                  <option value="6">FreshFruit Exports CR</option>
+                </select>
+                <small class="hint">Si no aparece, contacta a la Administración de la Zona Franca.</small>
+              </div>
+
+              <!-- Período -->
+              <div class="form-field">
+                <label class="form-label" for="periodo">🗓️ Período</label>
+                <select id="periodo" name="periodo" required>
+                  <option value="">— Trimestre —</option>
+                  <option value="2026-Q1">2026 Q1</option>
+                  <option value="2026-Q2">2026 Q2</option>
+                  <option value="2026-Q3">2026 Q3</option>
+                  <option value="2026-Q4">2026 Q4</option>
+                  <option value="2025-Q4">2025 Q4</option>
+                </select>
+              </div>
+
+              <!-- Empleos reales -->
+              <div class="form-field">
+                <label class="form-label" for="empleosReal">👷 Empleos directos activos</label>
+                <input type="number" id="empleosReal" name="empleosReal" min="0" step="1" placeholder="ej. 45" required />
+                <small class="hint">Debe incluir personal nacional (≥30%) y mujeres (≥20%).</small>
+              </div>
+
+              <!-- Inversión real -->
+              <div class="form-field">
+                <label class="form-label" for="inversionReal">💰 Inversión real ejecutada ($)</label>
+                <input type="number" id="inversionReal" name="inversionReal" min="0" step="0.01" placeholder="ej. 125000" required />
+                <small class="hint">Activos fijos ejecutados del trimestre.</small>
+              </div>
+
+              <!-- Exportaciones -->
+              <div class="form-field">
+                <label class="form-label" for="exportacionesReal">🚢 Exportaciones generadas ($)</label>
+                <input type="number" id="exportacionesReal" name="exportacionesReal" min="0" step="0.01" placeholder="ej. 850000" />
+                <small class="hint">Opcional si aplica a tu régimen.</small>
+              </div>
+
+              <!-- Nómina -->
+              <div class="form-field">
+                <label class="form-label" for="nominaTotal">💵 Nómina total pagada ($)</label>
+                <input type="number" id="nominaTotal" name="nominaTotal" min="0" step="0.01" placeholder="ej. 42000" />
+              </div>
+
+              <!-- Proveedores locales -->
+              <div class="form-field">
+                <label class="form-label" for="proveedoresLocales">🛒 Proveedores locales</label>
+                <input type="number" id="proveedoresLocales" name="proveedoresLocales" min="0" step="1" placeholder="ej. 3" />
+              </div>
+
+              <!-- Fecha de envío -->
+              <div class="form-field">
+                <label class="form-label" for="fechaEnvio">📅 Fecha de envío</label>
+                <input type="date" id="fechaEnvio" name="fechaEnvio" required />
+                <small class="hint">Antes del día 15 del mes siguiente al cierre del trimestre.</small>
+              </div>
+
+              <!-- Notas -->
+              <div class="form-field full">
+                <label class="form-label" for="notas">📝 Notas / modificaciones al plan</label>
+                <textarea id="notas" name="notas" rows="3" placeholder="Desviaciones, justificaciones, cambios de mercado..."></textarea>
+              </div>
+            </div>
+
+            <div class="modal-actions mt-3">
+              <button type="reset" class="pixel-btn soft">Limpiar 🧼</button>
+              <button type="submit" class="pixel-btn">Enviar reporte 🌟</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Carta de compromiso / minihistoria -->
+        <div class="grid-2 mt-3">
+          <div class="y2k-card">
+            <div class="card-title">🔒 Carta de Compromiso (RA-10)</div>
+            <p class="text-muted">
+              Al enviar este formulario, tu representante legal certifica que los datos
+              declarados son fieles y que cumples con los compromisos de inversión,
+              empleo y exportación pactados al ingresar al régimen.
+            </p>
+            <p class="text-muted">✍️ La administración validará contra tus compromisos originales y activará
+              alertas de cumplimiento (RC-01 a RC-07) en automático. ✨</p>
+          </div>
+
+          <div class="y2k-card">
+            <div class="card-title">🕹️ ¿Qué pasa después?</div>
+            <ul style="margin:0;padding-left:18px;color:#44586a;font-size:14px;">
+              <li>Recibimos tu reporte y lo archivamos con trazabilidad documental.</li>
+              <li>El motor de cumplimiento compara con compromisos (inversión, empleos, exportación).</li>
+              <li>Si hay desviación > 25% o reporte no recibido, se genera alerta roja 🚨.</li>
+              <li>PROCOMER recibe el consolidado trimestral automáticamente (simulación).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="pixel-footer" style="text-align:center;padding:18px;border-top:3px solid var(--teal);margin-top:10px;">
+      <span style="font-family:var(--font-pixel);font-size:11px;color:var(--pink);">// FranCat CR © 2026 🌸 Módulo 2 — Cumplimiento Trimestral</span>
+    </footer>
+
+    <script type="module" src="/src/js/pages/reporte.js"></script>
+  </body>
+</html>
