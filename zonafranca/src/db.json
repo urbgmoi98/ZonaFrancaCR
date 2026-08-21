@@ -1,0 +1,168 @@
+{
+  "zonasFrancas": [
+    {
+      "id": 1,
+      "nombre": "FranCat CR",
+      "ubicacion": {
+        "ciudad": "San José",
+        "departamento": "Desamparados",
+        "direccion": "Calle 100 # 15-20"
+      },
+      "tipo": "Industrial",
+      "estado": "Activo",
+      "fechaEstablecimiento": "2010-05-20",
+      "areaM2": 250000,
+      "administrador": "FranCat S.A."
+    },
+    {
+      "id": 2,
+      "nombre": "Zona Franca de San José",
+      "ubicacion": {
+        "ciudad": "Curridabat",
+        "departamento": "Atlántico",
+        "direccion": "Km 5 Vía Puerto"
+      },
+      "tipo": "Multipropósito",
+      "estado": "Activo",
+      "fechaEstablecimiento": "2015-11-03",
+      "areaM2": 180000,
+      "administrador": "MoiKrish S.A."
+    },
+    {
+      "id": 3,
+      "nombre": "Zona Franca Tecnológica de Medellín",
+      "ubicacion": {
+        "ciudad": "San José",
+        "departamento": "Pavas",
+        "direccion": "Calle 50 # 70-90"
+      },
+      "tipo": "Tecnológico",
+      "estado": "Inactivo",
+      "fechaEstablecimiento": "2018-08-15",
+      "areaM2": 45000,
+      "administrador": "TecnoZona S.A."
+    }
+  ],
+  "empresas": [
+    {
+      "id": 101,
+      "nit": "900.123.456-7",
+      "razonSocial": "Logística Internacional S.A.S.",
+      "representanteLegal": "María Fernanda Ríos",
+      "email": "contacto@logisticainternacional.com",
+      "telefono": "6015-5124",
+      "zonaFrancaId": 1,
+      "fechaAdmision": "2021-02-10",
+      "estado": "Activa",
+      "sectorEconomico": "Logística y transporte"
+    },
+    {
+      "id": 102,
+      "nit": "800.987.654-3",
+      "razonSocial": "Textiles del Norte Ltda.",
+      "representanteLegal": "Carlos Alberto Méndez",
+      "email": "ventas@textilesnorte.com",
+      "telefono": "6053-4591",
+      "zonaFrancaId": 2,
+      "fechaAdmision": "2019-07-22",
+      "estado": "Activa",
+      "sectorEconomico": "Manufactura textil"
+    },
+    {
+      "id": 103,
+      "nit": "901.555.789-0",
+      "razonSocial": "Energía Solar Costa Rica S.A.S.",
+      "representanteLegal": "Laura Gutiérrez Pardo",
+      "email": "info@energiasolar.co",
+      "telefono": "604-555-9012",
+      "zonaFrancaId": 3,
+      "fechaAdmision": "2023-01-15",
+      "estado": "Suspendida",
+      "sectorEconomico": "Energías renovables"
+    }
+    
+  ],
+  "solicitudes": [
+    {
+      "id": 1001,
+      "empresaId": 101,
+      "zonaFrancaId": 1,
+      "tipoSolicitud": "Admisión",
+      "fechaPresentacion": "2021-01-20",
+      "estado": "Aprobada",
+      "descripcion": "Solicitud de ingreso como usuario operador de la Zona Franca de Bogotá.",
+      "numeroResolucion": "RES-2021-045"
+    },
+    {
+      "id": 1002,
+      "empresaId": 102,
+      "zonaFrancaId": 2,
+      "tipoSolicitud": "Beneficio Tributario",
+      "fechaPresentacion": "2026-07-10",
+      "estado": "En Revisión",
+      "descripcion": "Solicitud de extensión de beneficio de IVA para importación de maquinaria especializada.",
+      "numeroResolucion": null
+    },
+    {
+      "id": 1003,
+      "empresaId": 103,
+      "zonaFrancaId": 3,
+      "tipoSolicitud": "Ampliación",
+      "fechaPresentacion": "2026-08-05",
+      "estado": "Pendiente",
+      "descripcion": "Solicitud para ampliar el área operativa en 5,000 m2 dentro de la zona franca.",
+      "numeroResolucion": null
+    },
+    {
+      "id": 1004,
+      "empresaId": 101,
+      "zonaFrancaId": 1,
+      "tipoSolicitud": "Exportación",
+      "fechaPresentacion": "2026-08-18",
+      "estado": "Rechazada",
+      "descripcion": "Permiso para exportar mercancía ensamblada hacia Estados Unidos sin certificado de origen.",
+      "numeroResolucion": "RES-2026-188"
+    }
+  ],
+  "reportesCumplimiento": [
+    {
+      "id": 2001,
+      "empresaId": 101,
+      "zonaFrancaId": 1,
+      "periodo": "2026-Q1",
+      "fechaPresentacion": "2026-04-10",
+      "estado": "Aprobado",
+      "exportacionesUSD": 2500000,
+      "importacionesUSD": 1200000,
+      "empleosGenerados": 85,
+      "inversionUSD": 500000,
+      "observaciones": "Cumple satisfactoriamente con las metas de inversión pactadas."
+    },
+    {
+      "id": 2002,
+      "empresaId": 102,
+      "zonaFrancaId": 2,
+      "periodo": "2026-Q1",
+      "fechaPresentacion": "2026-04-15",
+      "estado": "Radicado",
+      "exportacionesUSD": 850000,
+      "importacionesUSD": 2100000,
+      "empleosGenerados": 42,
+      "inversionUSD": 120000,
+      "observaciones": "Pendiente de revisión documental por parte de la DIAN."
+    },
+    {
+      "id": 2003,
+      "empresaId": 101,
+      "zonaFrancaId": 1,
+      "periodo": "2025-Q4",
+      "fechaPresentacion": "2026-01-20",
+      "estado": "Aprobado",
+      "exportacionesUSD": 3200000,
+      "importacionesUSD": 1400000,
+      "empleosGenerados": 80,
+      "inversionUSD": 750000,
+      "observaciones": "Reporte sin observaciones. Renovación automática de beneficios."
+    }
+  ]
+}

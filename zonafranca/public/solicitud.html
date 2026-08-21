@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nueva Solicitud - Zonas Francas</title>
+  <!-- Bootstrap 5 (CSS) para un diseño limpio y profesional -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .card-shadow {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+    .loading-spinner {
+      display: none;
+    }
+    .form-loading .loading-spinner {
+      display: inline-block;
+    }
+    .form-loading .btn-text {
+      display: none;
+    }
+    #messageArea {
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+
+        <!-- Tarjeta del formulario -->
+        <div class="card card-shadow border-0">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i> Formulario de Solicitud</h4>
+          </div>
+          <div class="card-body p-4">
+
+            <!-- Mensajes de éxito / error -->
+            <div id="messageArea" class="alert d-none" role="alert"></div>
+
+            <!-- Formulario -->
+            <form id="solicitudForm" novalidate>
+
+              <!-- Empresa -->
+              <div class="mb-3">
+                <label for="empresaId" class="form-label fw-bold">Empresa *</label>
+                <select id="empresaId" class="form-select" required>
+                  <option value="">-- Selecciona una empresa --</option>
+                </select>
+                <div class="invalid-feedback">Por favor selecciona una empresa.</div>
+              </div>
+
+              <!-- Zona Franca -->
+              <div class="mb-3">
+                <label for="zonaFrancaId" class="form-label fw-bold">Zona Franca *</label>
+                <select id="zonaFrancaId" class="form-select" required>
+                  <option value="">-- Selecciona una zona franca --</option>
+                </select>
+                <div class="invalid-feedback">plis selecciona una zona franca.</div>
+              </div>
+
+              <!-- Tipo de Solicitud -->
+              <div class="mb-3">
+                <label for="tipoSolicitud" class="form-label fw-bold">Tipo de Solicitud *</label>
+                <select id="tipoSolicitud" class="form-select" required>
+                  <option value="">-- Selecciona un tipo --</option>
+                  <option value="Admisión">Admisión</option>
+                  <option value="Beneficio Tributario">Beneficio Tributario</option>
+                  <option value="Ampliación">Ampliación</option>
+                  <option value="Exportación">Exportación</option>
+                  <option value="Importación">Importación</option>
+                  <option value="Renovación">Renovación</option>
+                </select>
+                <div class="invalid-feedback">Selecciona un tipo de solicitud.</div>
+              </div>
+
+              <!-- Fecha de Presentación -->
+              <div class="mb-3">
+                <label for="fechaPresentacion" class="form-label fw-bold">Fecha de Presentación *</label>
+                <input type="date" id="fechaPresentacion" class="form-control" required />
+                <div class="invalid-feedback">La fecha es obligatoria.</div>
+              </div>
+
+              <!-- Descripción -->
+              <div class="mb-4">
+                <label for="descripcion" class="form-label fw-bold">Descripción / Detalle</label>
+                <textarea id="descripcion" class="form-control" rows="4" placeholder="Describe el motivo o los detalles de la solicitud..."></textarea>
+              </div>
+
+              <!-- Botones -->
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="reset" class="btn btn-outline-secondary me-md-2" id="btnLimpiar">
+                  <i class="bi bi-arrow-counterclockwise"></i> Limpiar
+                </button>
+                <button type="submit" class="btn btn-primary" id="btnEnviar">
+                  <span class="loading-spinner">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  </span>
+                  <span class="btn-text"><i class="bi bi-send"></i> Enviar Solicitud</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- Info adicional -->
+        <p class="text-muted text-center mt-4 small">
+          <i class="bi bi-info-circle"></i> Asegúrate de que el servidor JSON (json-server) esté corriendo en <code>http://localhost:3001</code>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Icons (opcional, para los iconos) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <!-- Import Map para resolver las importaciones de módulos -->
+  <script type="importmap">
+    {
+      "imports": {
+        "#apiService": "../src/js/js/api.js"
+      }
+    }
+  </script>
+
+  <!-- Carga del script principal de la página (módulo) -->
+  <script type="module" src="../src/js/js/solicitud.js"></script>
+
+</body>
+</html>
