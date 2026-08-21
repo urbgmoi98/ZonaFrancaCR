@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FranCat CR ✦ Dashboard — Solicitudes de Empresas</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/css/webcore.css" />
+  </head>
+  <body>
+    <!-- Navegación pixel -->
+    <nav class="web-nav">
+      <a class="nav-brand" href="/">
+        <span>🩷</span> Fran<b>Cat</b><span> CR</span>
+      </a>
+      <div class="nav-links">
+        <a class="is-active" href="/">Dashboard</a>
+        <a href="/reporte.html">Reporte 📋</a>
+        <a href="/alertas.html">Alertas 🚨</a>
+      </div>
+      <div class="nav-stamp">★ ZONA FRANCA · MÓDULO 2 ★</div>
+    </nav>
+
+    <!-- Marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>✦ FRANCAT CR · ADMISIÓN & SUPERVISIÓN ✦</span>
+        <span>💖 RECIBIR · EVALUAR · APROBAR 💖</span>
+        <span>✦ COMPROMISO DE INVERSIÓN ✦</span>
+        <span>💖 EMPLEOS · SECTOR CNAE · COMPROMISOS 💖</span>
+        <span>✦ FRANCAT CR · ADMISIÓN & SUPERVISIÓN ✦</span>
+        <span>💖 RECIBIR · EVALUAR · APROBAR 💖</span>
+        <span>✦ COMPROMISO DE INVERSIÓN ✦</span>
+        <span>💖 EMPLEOS · SECTOR CNAE · COMPROMISOS 💖</span>
+      </div>
+    </div>
+
+    <main class="module-page">
+      <div class="page-wrap">
+        <h1 class="section-title">
+          <span>🖥️ Dashboard — Solicitudes de Zona Franca</span>
+          <span class="title-stamp">Módulo 2</span>
+        </h1>
+
+        <!-- RF-18: Barra de métricas con contadores pixel -->
+        <div class="metrics-grid" id="metricsGrid">
+          <div class="metric-card">
+            <div class="metric-label">Total Solicitudes</div>
+            <div class="pixel-count" id="metricTotal">0</div>
+            <div class="metric-note">recibidas en el sistema</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">% Aprobadas</div>
+            <div class="pixel-count" id="metricAprobadas">0%</div>
+            <div class="metric-note">empresas admitidas al régimen</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Tiempo Respuesta Prom.</div>
+            <div class="pixel-count" id="metricTiempo">0</div>
+            <div class="metric-note">días hábiles promedio</div>
+          </div>
+        </div>
+
+        <!-- RF-15 · Barra de filtros -->
+        <div class="filter-bar" id="filterBar">
+          <div class="filter-field">
+            <label for="filtroBusqueda">🔎 Buscar empresa</label>
+            <input type="text" id="filtroBusqueda" placeholder="ej. BioMedica..." />
+          </div>
+          <div class="filter-field">
+            <label for="filtroEstado">🏷️ Estado</label>
+            <select id="filtroEstado">
+              <option value="">Todos</option>
+              <option value="Aprobada">Aprobada</option>
+              <option value="En Revisión">En Revisión</option>
+              <option value="Pendiente">Pendiente</option>
+              <option value="Rechazada">Rechazada</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="filtroSector">🏭 Sector</label>
+            <select id="filtroSector">
+              <option value="">Todos</option>
+              <!-- se llena dinámicamente -->
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="filtroZona">📍 Zona Franca</label>
+            <select id="filtroZona">
+              <option value="">Todas</option>
+              <!-- se llena dinámicamente -->
+            </select>
+          </div>
+        </div>
+
+        <!-- Grid de solicitudes -->
+        <div id="solicitudesGrid" class="solicitudes-grid">
+          <div class="empty-state">Cargando solicitudes con IA... ✨</div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="pixel-footer" style="text-align:center;padding:18px;border-top:3px solid var(--teal);margin-top:10px;">
+      <span style="font-family:var(--font-pixel);font-size:11px;color:var(--pink);">// FranCat CR © 2026 🌸 Dashboard — Trazabilidad Total</span>
+    </footer>
+
+    <script type="module">
+      /* ============================================================
+         FranCat CR — Dashboard global (RF-15 / RF-14 / RF-18)
+         Lógica integrada en index.html (no hay archivo .js dedicado)
+         - RF-18: Métricas con contadores pixel 🍓
+         - RF-15: Filtros por estado, sector, zona franca y búsqueda
+         - RF-14: Modal de auditoría (historial completo por empresa)
+         ============================================================ */
+      import {
+        showLoading,
+        hideLoading,
+        showFriendlyError,
+        initSparkles,
+        initFloatingEmojis,
+        esc,
+        formatCurrency,
+        formatDate,
+      } from '/src/js/ui-helpers.js';
+
+      const API_BASE = 'http://localhost:3001';
+      let solicitudes = [];
+      let filtros = { busqueda: '', estado: '', sector: '', zona: '' };
+
+      /* ---------- Pills de estado ---------- */
+      function pillEstado(estado) {
+        const map = {
+          'Aprobada': 'pill-green',
+          'En Revisión': 'pill-yellow',
+          'Pendiente': 'pill-neutro',
+          'Rechazada': 'pill-red',
+        };
+        return `<span class="pill ${map[estado] || 'pill-neutro'}">${esc(estado)}</span>`;
+      }
+
+      /* ---------- Card de solicitud ---------- */
+      function cardHTML(s) {
+        const sector = s.sector || s.sectorCodigo || '—';
+        const zona = s.zonaFranca || '—';
+        const inversion = Number(s.inversionAnual || s.inversionAnualR || 0);
+        const empleos = Number(s.empleosAnual || 0);
+        const exportaciones = Number(s.exportacionesAnuales || 0);
+
+        return `
+          <article class="y2k-card solicitud-card" data-id="${esc(s.id)}" title="Ver historial completo de ${esc(s.empresa)}">
+            <div class="card-top">
+              <h3>${esc(s.empresa)}</h3>
+              ${pillEstado(s.estado)}
+            </div>
+            <div class="meta-row">
+              <span class="chip">🏭 ${esc(s.sector || '—')}</span>
+              <span class="chip">📍 ${esc(s.zonaFranca || '—')}</span>
+              <span class="chip">🆔 ${esc(s.sectorCodigo || '—')}</span>
+            </div>
+            <ul class="commits-list">
+              <li><span>Inversión comprometida</span><b>${formatCurrency(inversion)}</b></li>
+              <li><span>Empleos comprometidos</span><b>${Number(empleos).toLocaleString('en-US')}</b></li>
+              <li><span>Exportaciones proyectadas</span><b>${formatCurrency(exportaciones)}</b></li>
+            </ul>
+            <div class="meta-row">
+              <span class="chip green">📅 ${formatDate(s.fechaSolicitud)}</span>
+              ${s.scoreIA != null ? `<span class="chip hot">🧠 Score IA: ${Number(s.scoreIA)}/100</span>` : ''}
+              <span class="chip pink">🔍 Click para auditoría</span>
+            </div>
+          </article>
+        `;
+      }
+
+      /* ---------- Render de solicitudes filtradas ---------- */
+      function renderSolicitudes() {
+        const grid = document.getElementById('solicitudesGrid');
+        if (!grid) return;
+
+        const filtradas = solicitudes.filter((s) => {
+          const txt = (s.empresa || '').toUpperCase();
+          const busq = filtros.busqueda || '';
+          if (busq && !txt.includes(busq.toUpperCase())) return false;
+          if (filtros.estado && s.estado !== filtros.estado) return false;
+          if (filtros.sector && s.sector !== filtros.sector) return false;
+          if (filtros.zona && s.zonaFranca !== filtros.zona) return false;
+          return true;
+        });
+
+        if (filtradas.length === 0) {
+          grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">✨ No hay solicitudes que coincidan con los filtros ✨</div>`;
+          return;
+        }
+
+        grid.innerHTML = filtradas.map(cardHTML).join('');
+      }
+
+      /* ---------- Llenar selects de filtros (RF-15) ---------- */
+      function llenarSelectores() {
+        const sectores = [...new Set(solicitudes.map((s) => s.sector).filter(Boolean))].sort();
+        const zonas = [...new Set(solicitudes.map((s) => s.zonaFranca).filter(Boolean))].sort();
+
+        const selSector = document.getElementById('filtroSector');
+        const selZona = document.getElementById('filtroZona');
+        if (selSector) {
+          selSector.innerHTML = '<option value="">Todos</option>' +
+            sectores.map((x) => `<option value="${esc(x)}">${esc(x)}</option>`).join('');
+        }
+        if (selZona) {
+          selZona.innerHTML = '<option value="">Todas</option>' +
+            zonas.map((x) => `<option value="${esc(x)}">${esc(x)}</option>`).join('');
+        }
+      }
+
+      /* ---------- RF-18: Métricas ---------- */
+      function renderMetricas() {
+        const total = solicitudes.length;
+        const aprobadas = solicitudes.filter((s) => String(s.estado).toLowerCase() === 'aprobada').length;
+        const pctAprobadas = total > 0 ? Math.round((aprobadas / total) * 100) : 0;
+
+        const tiempos = solicitudes
+          .map((s) => Number(s.tiempoRespuestaDias) || 0)
+          .filter((t) => t > 0);
+        const promTiempo = tiempos.length > 0
+          ? (tiempos.reduce((a, b) => a + b, 0) / tiempos.length).toFixed(1)
+          : '—';
+
+        const elTotal = document.getElementById('metricTotal');
+        const elAprob = document.getElementById('metricAprobadas');
+        const elTiempo = document.getElementById('metricTiempo');
+
+        if (elTotal) elTotal.textContent = total;
+        if (elAprob) elAprob.textContent = pctAprobadas + '%';
+        if (elTiempo) elTiempo.textContent = promTiempo;
+      }
+
+      /* ---------- RF-14: Modal de auditoría ---------- */
+      function pillarTipo(tipo) {
+        const map = {
+          'solicitud': ['pill-blue', '📥 Solicitud inicial'],
+          'score-ia': ['chip hot', '🧠 Score IA'],
+          'decision': ['pill-green', '⚖️ Decisión analista'],
+          'rechazo': ['pill-red', '🚫 Rechazo'],
+          'obs': ['pill-yellow', '📌 Observación'],
+          'memoria': ['pill-blue', '🗄️ Memoria / Carta'],
+        };
+        const [cls, label] = map[tipo] || ['pill-neutro', '📄 Evento'];
+        return `<span class="pill ${cls}">${label}</span>`;
+      }
+
+      function auditarSolicitud(id) {
+        const s = solicitudes.find((x) => Number(x.id) === Number(id));
+        if (!s) return;
+
+        const historia = s.historial || [];
+        const timelineItems = historia.length > 0
+          ? historia.map((h) => `
+              <li class="tl-item">
+                <div class="tl-date">${formatDate(h.fecha)}</div>
+                <div class="tl-title">${pillarTipo(h.tipo)}</div>
+                <div class="tl-desc">${esc(h.descripcion || '')}</div>
+                <div class="tl-pills"><span class="pill pill-neutro">→ ${esc(h.estado || '')}</span></div>
+              </li>
+            `).join('')
+          : `<li class="tl-item"><div class="tl-desc">Sin historial registrado aún.</div></li>`;
+
+        const resumen = `
+          <table class="data-table" style="margin-top:10px;">
+            <thead>
+              <tr><th>Compromiso</th><th>Valor</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sector</td><td>${esc(s.sector || '—')} (${esc(s.sectorCodigo || '—')})</td></tr>
+              <tr><td>Zona Franca</td><td>${esc(s.zonaFranca || '—')}</td></tr>
+              <tr><td>Inversión comprometida</td><td>${formatCurrency(s.inversionAnual || s.inversionAnualR || 0)}</td></tr>
+              <tr><td>Empleos comprometidos</td><td>${Number(s.empleosAnual || 0).toLocaleString('en-US')}</td></tr>
+              <tr><td>Exportaciones anuales</td><td>${formatCurrency(s.exportacionesAnuales || 0)}</td></tr>
+              ${s.scoreIA != null ? `<tr><td>Score IA (elegibilidad)</td><td>${Number(s.scoreIA)}/100</td></tr>` : ''}
+              <tr><td>Fecha solicitud</td><td>${formatDate(s.fechaSolicitud)}</td></tr>
+              <tr><td>Fecha resolución</td><td>${formatDate(s.fechaResolucion)}</td></tr>
+            </tbody>
+          </table>
+        `;
+
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+          <div class="pixel-modal" style="max-width:640px;">
+            <h3 class="modal-title">🔍 Auditoría — ${esc(s.empresa)}</h3>
+            ${pillEstado(s.estado)}
+            <p class="text-muted">Trazabilidad completa: solicitud original + score IA + evaluaciones trimestrales + decisiones del comité (RF-14).</p>
+            ${resumen}
+            <div class="tl-pills" style="margin-top:14px;">
+              <span class="pill pill-blue">Historial 100% trazable</span>
+            </div>
+            <ul class="timeline">${timelineItems}</ul>
+            <div class="modal-actions">
+              <button class="pixel-btn soft" data-close-modal>Cerrar</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) modal.remove();
+        });
+        modal.querySelector('[data-close-modal]').addEventListener('click', () => modal.remove());
+      }
+
+      /* ---------- Delegación de clics en el grid ---------- */
+      function bindGrid() {
+        const grid = document.getElementById('solicitudesGrid');
+        if (!grid) return;
+        grid.addEventListener('click', (e) => {
+          const card = e.target.closest('.solicitud-card');
+          if (card) auditarSolicitud(card.dataset.id);
+        });
+      }
+
+      /* ---------- Carga inicial ---------- */
+      async function cargarSolicitudes() {
+        showLoading({
+          title: 'Cargando datos con IA... ✨',
+          hint: 'consultando base de datos de la zona franca',
+        });
+        try {
+          const res = await fetch(`${API_BASE}/solicitudes`);
+          if (!res.ok) throw new Error('status ' + res.status);
+          solicitudes = await res.json();
+          llenarSelectores();
+          renderMetricas();
+          renderSolicitudes();
+        } catch (err) {
+          showFriendlyError({
+            title: 'No pudimos cargar las solicitudes 💔',
+            message:
+              'El servidor de datos no está disponible. Verifica que json-server esté corriendo en http://localhost:3001 e inténtalo de nuevo.',
+            code: err.status ? String(err.status) : 'CONEXIÓN',
+            icon: '📡',
+          });
+        } finally {
+          hideLoading();
+        }
+      }
+
+      /* ---------- Init ---------- */
+      function initDashboard() {
+        initSparkles();
+        initFloatingEmojis();
+        bindGrid();
+
+        // Filtros (RF-15)
+        const onFilter = (key, value) => {
+          filtros[key] = value;
+          renderSolicitudes();
+        };
+        const inputBusqueda = document.getElementById('filtroBusqueda');
+        const selectEstado = document.getElementById('filtroEstado');
+        const selectSector = document.getElementById('filtroSector');
+        const selectZona = document.getElementById('filtroZona');
+
+        if (inputBusqueda) {
+          inputBusqueda.addEventListener('input', () => onFilter('busqueda', inputBusqueda.value.trim()));
+        }
+        if (selectEstado) selectEstado.addEventListener('change', () => onFilter('estado', selectEstado.value));
+        if (selectSector) selectSector.addEventListener('change', () => onFilter('sector', selectSector.value));
+        if (selectZona) selectZona.addEventListener('change', () => onFilter('zona', selectZona.value));
+
+        cargarSolicitudes();
+      }
+
+      initDashboard();
+    </script>
+  </body>
+</html>
