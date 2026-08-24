@@ -3,7 +3,7 @@ import {
   empresasService,
   zonasFrancasService,
   solicitudesService,
-} from '#apiService';
+} from './api.js';
 
 // ------------------------------------------------------------
 // Referencias a elementos del DOM

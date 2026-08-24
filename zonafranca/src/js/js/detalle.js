@@ -13,8 +13,8 @@ import {
   solicitudesService,
   empresasService,
   zonasFrancasService,
-} from '#apiService';
-import { evaluarSolicitud, clasificarPorPuntaje } from '#iaEngine';
+} from './api.js';
+import { evaluarSolicitud, clasificarPorPuntaje } from './ia-engine.js';
 
 const API_BASE = 'http://localhost:3001';
 

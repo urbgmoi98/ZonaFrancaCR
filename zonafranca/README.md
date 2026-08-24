@@ -39,7 +39,7 @@ La interfaz combina dos estilos visuales:
 | Tecnología | Uso |
 | --- | --- |
 | **Vite 8** (`^8.2.0`) | Servidor de desarrollo, compilación y preview del proyecto web |
-| **JavaScript (módulos ES)** | Lógica del frontend, `importmap` para resolver importaciones |
+| **JavaScript (módulos ES)** | Lógica del frontend; imports relativos resueltos por Vite y empaquetados en el build |
 | **json-server** | API REST simulada en `http://localhost:3001` con datos en `src/db.json` |
 | **HTML5 / CSS3** | Maquetado y estilos (tema custom + Bootstrap 5.3) |
 | **Bootstrap 5.3.2** | Componentes en los formularios (solicitud, detalle) |
@@ -57,37 +57,34 @@ El proyecto real se aloja en la subcarpeta **`zonafranca/`** dentro del director
 ```
 zonafranca/
 ├── package.json              # Configuración del proyecto (Vite)
+├── vite.config.js            # App multi-página (MPA): entradas de build + publicDir
 ├── .gitignore
-├── public/                   # Páginas HTML (frontend estático)
-│   ├── index.html            # Dashboard de solicitudes de admisión
-│   ├── reporte.html           # Formulario de reporte trimestral
-│   ├── alertas.html           # Panel de alertas de cumplimiento (creado)
-│   ├── solicitud.html         # Formulario de nueva solicitud (Bootstrap)
-│   ├── detalle-solicitud.html # Detalle + evaluación IA de una solicitud
+├── index.html                # Dashboard de solicitudes de admisión (raíz "/")
+├── reporte.html              # Formulario de reporte trimestral
+├── alertas.html              # Panel de alertas de cumplimiento
+├── solicitud.html            # Formulario de nueva solicitud (Bootstrap)
+├── detalle-solicitud.html    # Detalle + evaluación IA de una solicitud
+├── public/                   # Estáticos copiados tal cual (no procesados)
 │   ├── favicon.svg
 │   └── icons.svg
 └── src/
     ├── db.json                # Base de datos del json-server (colecciones)
-    ├── main.js                # Punto de entrada Vite (plantilla original)
-    ├── counter.js
-    ├── style.css
     ├── assets/                # Imágenes/recursos (hero, svg)
     ├── css/
     │   └── webcore.css        # Tema visual Y2K pixel principal
     ├── js/                    # Módulos JavaScript
     │   ├── ui-helpers.js            # Helpers de UI (modales, loading, toasts)
     │   ├── compliance-engine.js     # Motor de cumplimiento y alertas (RC-01..RC-07)
+    │   ├── neon-bg.js               # Fondo "hacker" de lluvia de código neón
     │   ├── js/
     │   │   ├── api.js               # Cliente HTTP genérico hacia json-server
     │   │   ├── ia-engine.js         # Motor de IA (score 0-100, clasificación)
     │   │   ├── solicitud.js         # Lógica del formulario de solicitud
     │   │   └── detalle.js           # Lógica del detalle de solicitud
     │   └── pages/
-    │       ├── reporte.js          # Lógica del formulario de reporte
-    │       └── alertas.js          # Lógica del panel de alertas
+    │       └── reporte.js          # Lógica del formulario de reporte
     └── pages/
-        ├── alertas.js             # (variante) lógica de alertas
-        ├── i.html / ii.html       # archivos de prueba/placeholder
+        └── alertas.js             # Lógica del panel de alertas
 ```
 
 > **Nota:** en la raíz del directorio de trabajo también hay copias del `index.html` y de `node_modules`. La versión válida del proyecto es la contenida en `zonafranca/`.
@@ -220,6 +217,16 @@ El servidor de datos se alimenta de `src/db.json` y expone colecciones REST en `
    ```
 4. **Abrir en el navegador** la URL que muestre Vite (por defecto `http://localhost:5173`).
 
+   > El Dashboard se sirve en la raíz (`/`). Las demás páginas están en `/reporte.html`, `/alertas.html`, `/solicitud.html` y `/detalle-solicitud.html`.
+
+5. **Construcción de producción** (opcional):
+   ```bash
+   npm run build      # genera la carpeta dist/ con las 5 páginas + assets
+   npm run preview    # sirve el build en http://localhost:4173
+   ```
+
+   > La app es una **aplicación multi-página (MPA)**: `vite.config.js` declara las 5 páginas HTML como entradas de build y `public/` queda reservado solo para los SVG estáticos (`favicon.svg`, `icons.svg`).
+
 > Los scripts definidos en `package.json` son:
 >
 > ```json
@@ -236,6 +243,7 @@ El servidor de datos se alimenta de `src/db.json` y expone colecciones REST en `
 - **Base de datos consolidada:** `db.json` quedó unificado en un solo esquema funcional.
 - **Duplicados eliminados:** se removieron las copias en la raíz del directorio de trabajo (`index.html`, `package-lock.json`) y los archivos vacíos/de plantilla (`i.html`, `ii.html`, `main.js`, `counter.js`, `style.css`, `vite.svg`, `javascript.svg`); la fuente de verdad del proyecto es la carpeta `zonafranca/`.
 - **Fondo neon dinámico (hacker):** `src/js/neon-bg.js` añade lluvia de código en rosa neón; `webcore.css` incorpora el tema **NEON HACKER** (rejilla animada, scanlines CRT, glow). `alertas.html` fue creado y `detalle.js` (página de detalle IA) fue implementado.
+- **Build verificado ✓:** `npm run build` genera `dist/` con las 5 páginas correctamente empaquetadas (los módulos JS se resuelven con imports relativos — ya no se dependen de `importmap` del navegador). `npm run dev` y `npm run preview` sirven el Dashboard en `/`.
 
 ---
 
