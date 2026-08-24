@@ -17,6 +17,7 @@
         <a class="is-active" href="/">Dashboard</a>
         <a href="/reporte.html">Reporte 📋</a>
         <a href="/alertas.html">Alertas 🚨</a>
+        <a href="/solicitud.html">Solicitud ✍️</a>
       </div>
       <div class="nav-stamp">★ ZONA FRANCA · MÓDULO 2 ★</div>
     </nav>
@@ -122,6 +123,7 @@
         formatCurrency,
         formatDate,
       } from '/src/js/ui-helpers.js';
+      import '/src/js/neon-bg.js';
 
       const API_BASE = 'http://localhost:3001';
       let solicitudes = [];
@@ -167,6 +169,7 @@
               ${s.scoreIA != null ? `<span class="chip hot">🧠 Score IA: ${Number(s.scoreIA)}/100</span>` : ''}
               <span class="chip pink">🔍 Click para auditoría</span>
             </div>
+            <button class="pixel-btn soft btn-detalle-ia" data-detalle="${esc(s.id)}">🧠 Evaluar con IA</button>
           </article>
         `;
       }
@@ -310,6 +313,12 @@
         const grid = document.getElementById('solicitudesGrid');
         if (!grid) return;
         grid.addEventListener('click', (e) => {
+          const detalleBtn = e.target.closest('[data-detalle]');
+          if (detalleBtn) {
+            e.stopPropagation();
+            window.location.href = '/detalle-solicitud.html?id=' + encodeURIComponent(detalleBtn.dataset.detalle);
+            return;
+          }
           const card = e.target.closest('.solicitud-card');
           if (card) auditarSolicitud(card.dataset.id);
         });

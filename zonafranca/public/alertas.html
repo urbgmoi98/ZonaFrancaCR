@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FranCat CR ✦ Panel de Alertas de Cumplimiento</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/css/webcore.css" />
+  </head>
+  <body>
+    <!-- Navegación pixel -->
+    <nav class="web-nav">
+      <a class="nav-brand" href="/">
+        <span>🩷</span> Fran<b>Cat</b><span> CR</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">Dashboard</a>
+        <a href="/reporte.html">Reporte 📋</a>
+        <a class="is-active" href="/alertas.html">Alertas 🚨</a>
+        <a href="/solicitud.html">Solicitud ✍️</a>
+      </div>
+      <div class="nav-stamp">★ ZONA FRANCA · MÓDULO 2 ★</div>
+    </nav>
+
+    <!-- Marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>✦ FRANCAT CR · SUPERVISIÓN & CUMPLIMIENTO ✦</span>
+        <span>💖 RC-01 … RC-07 · MOTOR DE CUMPLIMIENTO 💖</span>
+        <span>✦ ALERTAS VERDES · AMARILLAS · ROJAS ✦</span>
+        <span>💖 EXPORTACIÓN CONSOLIDADA A PROCOMER 💖</span>
+        <span>✦ FRANCAT CR · SUPERVISIÓN & CUMPLIMIENTO ✦</span>
+        <span>💖 RC-01 … RC-07 · MOTOR DE CUMPLIMIENTO 💖</span>
+        <span>✦ ALERTAS VERDES · AMARILLAS · ROJAS ✦</span>
+        <span>💖 EXPORTACIÓN CONSOLIDADA A PROCOMER 💖</span>
+      </div>
+    </div>
+
+    <main class="module-page">
+      <div class="page-wrap">
+        <h1 class="section-title">
+          <span>🚨 Panel de Alertas de Cumplimiento</span>
+          <span class="title-stamp">RF-08 / RF-09</span>
+        </h1>
+
+        <!-- Contadores resumen (lo llena renderContadores) -->
+        <div class="alert-toolbar" id="contadores"></div>
+
+        <!-- Filtros por nivel -->
+        <div class="alert-toolbar">
+          <button class="filter-chip is-active" data-filtro="todas">Todas</button>
+          <button class="filter-chip" data-filtro="roja">🔴 Rojas</button>
+          <button class="filter-chip" data-filtro="amarilla">🟡 Amarillas</button>
+          <button class="filter-chip" data-filtro="ok">🟢 En regla</button>
+          <button class="pixel-btn soft" id="exportarTodo" style="margin-left:auto;">📤 Exportar todo (PROCOMER)</button>
+        </div>
+
+        <!-- Grid de alertas -->
+        <div id="alertasGrid" class="alertas-grid">
+          <div class="empty-state" style="grid-column:1/-1;">Cargando reportes y evaluando cumplimiento con IA... ✨</div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="pixel-footer" style="text-align:center;padding:18px;border-top:3px solid var(--hot);margin-top:10px;">
+      <span style="font-family:var(--font-pixel);font-size:11px;color:var(--pink);">// FranCat CR © 2026 🌸 Módulo 2 — Cumplimiento Trimestral · PROCOMER WATCH</span>
+    </footer>
+
+    <script type="module" src="/src/pages/alertas.js"></script>
+    <script type="module" src="/src/js/neon-bg.js"></script>
+  </body>
+</html>

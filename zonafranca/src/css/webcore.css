@@ -800,3 +800,234 @@ input, select, textarea { font-family: inherit; }
   white-space: pre;
   border-radius: 4px;
 }
+/* ============================================================
+   NEON HACKER — TEMA OSCURO DINAMICO (ROSA NEON)
+   Sobreescritura profesional de la estetica Y2K: terminal
+   hacker con lluvia de codigo (src/js/neon-bg.js), rejilla
+   animada, scanlines CRT y glow rosa neon.
+   ============================================================ */
+
+:root {
+  --navy: #14011c;
+  --teal: #55104a;
+  --hot: #ff2bd6;
+  --pink: #ff8ff0;
+  --pink-light: #ffc2f5;
+  --pink-pale: #2b0737;
+  --pink-mid: #7a1a6b;
+  --green: #4dffc3;
+  --paper: rgba(24, 4, 34, 0.88);
+  --white: #1a0422;
+  --yellow: #ffd166;
+  --purple: #d15cff;
+  --ink: #ffeafb;
+  --ink-dark: #ffeafb;
+  --bg-rose-deep: #ff2bd6;
+  --bg-rose-main: #3a0a46;
+  --bg-rose-soft: #25042e;
+  --bg-rose-pale: #0b0112;
+  --shadow-y2k: 5px 5px 0 rgba(255, 43, 214, 0.35);
+  --shadow-soft: 0 4px 18px rgba(255, 43, 214, 0.28);
+  --glow-hot: 0 0 12px var(--hot), 0 0 30px rgba(255, 43, 214, 0.62);
+}
+
+body {
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 43, 214, 0.16), transparent 44%),
+    radial-gradient(circle at 82% 76%, rgba(178, 40, 255, 0.14), transparent 46%),
+    radial-gradient(circle at 50% 110%, rgba(255, 33, 200, 0.12), transparent 50%),
+    linear-gradient(165deg, #07000c 0%, #150222 46%, #0b0112 100%);
+}
+
+/* --- Rejilla tecnica animada (fondo) --- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 43, 214, 0.05) 0 1px, transparent 1px 34px),
+    repeating-linear-gradient(90deg, rgba(255, 43, 214, 0.05) 0 1px, transparent 1px 34px);
+  background-size: 34px 34px;
+  animation: neonGridMove 14s linear infinite;
+  opacity: 0.85;
+}
+@keyframes neonGridMove {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 34px; }
+}
+
+/* --- Scanlines CRT + vineta (por encima, muy sutil) --- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.14) 0 1px, transparent 1px 3px),
+    radial-gradient(circle at 50% 45%, transparent 58%, rgba(7, 0, 12, 0.55) 100%);
+}
+
+/* --- Navegacion --- */
+.web-nav {
+  background: rgba(18, 2, 27, 0.82);
+  border-color: rgba(255, 43, 214, 0.55);
+  border-bottom-color: rgba(255, 43, 214, 0.8);
+  box-shadow: 0 6px 0 rgba(255, 43, 214, 0.25), 0 0 20px rgba(255, 43, 214, 0.25);
+  backdrop-filter: blur(10px);
+}
+.nav-brand { color: var(--pink); text-shadow: 0 0 8px rgba(255, 43, 214, 0.6); }
+.nav-brand b { color: var(--hot); }
+.nav-links a {
+  color: var(--ink);
+  border-color: rgba(255, 43, 214, 0.4);
+  background: rgba(25, 4, 34, 0.55);
+}
+.nav-links a:hover,
+.nav-links a.is-active {
+  background: var(--hot);
+  border-color: var(--hot);
+  color: #0b0112;
+  box-shadow: 0 0 14px var(--hot), 0 4px 14px rgba(255, 43, 214, 0.5);
+}
+.nav-stamp { color: var(--pink); border-color: rgba(255, 43, 214, 0.55); background: rgba(14, 1, 26, 0.7); }
+/* --- Tarjetas Y2K translucidas neon --- */
+.y2k-card {
+  background: rgba(20, 3, 30, 0.78);
+  color: var(--ink);
+  border: 3px solid rgba(255, 43, 214, 0.75);
+  outline: 2px solid rgba(255, 43, 214, 0.3);
+  outline-offset: 2px;
+  box-shadow: 8px 8px 0 rgba(255, 43, 214, 0.22), 0 0 22px rgba(255, 43, 214, 0.18);
+}
+.y2k-card:hover {
+  box-shadow: 10px 10px 0 rgba(255, 43, 214, 0.3), 0 0 34px rgba(255, 43, 214, 0.32);
+}
+.y2k-card::after { color: var(--hot); text-shadow: 0 0 12px var(--hot), 0 0 26px var(--hot); }
+.y2k-card.pink-fill { background: rgba(41, 6, 52, 0.85); }
+
+.card-title, .solicitud-card h3, .alert-head h3 { color: var(--pink); text-shadow: 0 0 10px rgba(255, 43, 214, 0.4); }
+.alert-empresa { color: var(--pink-light); }
+.text-muted { color: #d9a8e8; }
+
+/* --- Formularios / filtros --- */
+.filter-bar {
+  background: rgba(40, 2, 52, 0.55);
+  border-color: rgba(255, 43, 214, 0.5);
+  border-bottom-color: rgba(255, 43, 214, 0.75);
+  box-shadow: 0 0 18px rgba(255, 43, 214, 0.15);
+}
+.filter-bar input, .filter-bar select,
+.form-field input, .form-field select, .form-field textarea {
+  background: #130220;
+  color: var(--ink);
+  border-color: rgba(255, 43, 214, 0.55);
+}
+.filter-bar input:focus, .filter-bar select:focus,
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+  border-color: var(--hot);
+  box-shadow: 0 0 0 3px rgba(255, 43, 214, 0.28), 0 0 16px rgba(255, 43, 214, 0.25);
+}
+.form-field small.hint { color: #c89bd6; }
+
+/* --- Metricas y contadores --- */
+.metric-card {
+  background: rgba(43, 7, 55, 0.72);
+  border-color: rgba(255, 43, 214, 0.6);
+  outline-color: rgba(255, 43, 214, 0.3);
+  box-shadow: 0 0 18px rgba(255, 43, 214, 0.2);
+}
+.pixel-count {
+  background: rgba(255, 43, 214, 0.16);
+  border-color: var(--hot);
+  box-shadow: inset 0 0 14px rgba(255, 43, 214, 0.45), 0 0 18px rgba(255, 43, 214, 0.5);
+  text-shadow: 0 0 12px var(--hot), 0 0 26px var(--hot);
+}
+
+/* --- Chips, pills y compromisos --- */
+.chip {
+  background: rgba(30, 5, 40, 0.7);
+  border-color: rgba(255, 143, 240, 0.5);
+  color: var(--pink-light);
+}
+.chip.hot { border-color: var(--hot); color: var(--hot); background: rgba(255, 43, 214, 0.12); }
+.chip.green { border-color: var(--green); color: var(--green); background: rgba(77, 255, 195, 0.08); }
+.commits-list {
+  background: rgba(255, 43, 214, 0.08);
+  border-color: rgba(255, 43, 214, 0.5);
+  color: var(--ink);
+}
+.commits-list b { color: var(--hot); }
+.pill-neutro { background: #3a1247; color: var(--pink-light); }
+/* --- Alertas --- */
+.filter-chip {
+  background: rgba(43, 7, 55, 0.7);
+  border-color: rgba(255, 43, 214, 0.55);
+  color: var(--pink-light);
+}
+.filter-chip:hover { background: rgba(255, 43, 214, 0.2); color: #fff; }
+.filter-chip.is-active {
+  background: var(--hot);
+  border-color: var(--hot);
+  color: #0b0112;
+  box-shadow: 0 0 14px var(--hot);
+}
+.alert-panel {
+  background: rgba(20, 3, 30, 0.8);
+  border-color: rgba(255, 43, 214, 0.6);
+}
+.alert-panel.roja { border-color: var(--hot); box-shadow: 0 0 16px rgba(255, 43, 214, 0.8); }
+.alert-panel.amarilla { border-color: var(--yellow); box-shadow: 0 0 12px rgba(255, 209, 102, 0.5); }
+.alert-panel.ok { border-color: var(--green); box-shadow: 0 0 10px rgba(77, 255, 195, 0.35); }
+.metric-break .row {
+  background: rgba(18, 3, 26, 0.7);
+  border-color: rgba(255, 43, 214, 0.22);
+  color: var(--ink);
+}
+.metric-break .row b { color: var(--hot); }
+.alert-messages { color: #dcc4e8; }
+
+/* --- Tablas y timeline --- */
+.data-table { background: rgba(18, 3, 26, 0.7); border-color: rgba(255, 43, 214, 0.6); }
+.data-table td { border-color: rgba(255, 43, 214, 0.2); color: var(--ink); }
+.data-table th { background: #1b0230; color: var(--pink); border-color: rgba(255,43,214,.35); }
+.data-table tr:hover td { background: rgba(255, 43, 214, 0.07); }
+.timeline::before { background: repeating-linear-gradient(180deg, var(--hot) 0 8px, rgba(255,43,214,.35) 8px 16px); }
+
+/* --- Modales y superficies --- */
+.pixel-modal {
+  background: #150225;
+  border: 4px solid var(--hot);
+  outline: 3px solid rgba(255, 43, 214, 0.45);
+  box-shadow: 0 0 26px rgba(255, 43, 214, 0.35);
+  color: var(--ink);
+}
+.loading-title { color: var(--pink); }
+.error-title { color: var(--hot); }
+.skeleton { background: linear-gradient(90deg, #2a0a3a 25%, #43105a 50%, #2a0a3a 75%); }
+
+/* --- Utilidades --- */
+.empty-state { border-color: rgba(255, 43, 214, 0.45); }
+.procomer-preview { border-color: var(--hot); color: var(--pink-light); }
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+}
+/* --- Boton Detalle IA (tarjetas dashboard) --- */
+.btn-detalle-ia {
+  margin-top: 10px;
+  width: 100%;
+  justify-content: center;
+  box-shadow: none;
+  border-color: rgba(255, 43, 214, 0.7);
+  background: rgba(255, 143, 240, 0.12);
+  color: var(--pink-light);
+}
+.btn-detalle-ia:hover {
+  background: var(--hot);
+  color: #0b0112;
+  box-shadow: 0 0 14px rgba(255, 43, 214, 0.5);
+}

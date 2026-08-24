@@ -29,7 +29,7 @@ El sistema **FranCat CR** permite gestionar el ciclo de vida completo de una emp
 
 La interfaz combina dos estilos visuales:
 
-- **Estética Y2K / webcore "pixel"** con paleta rosa pastel (`webcore.css`) para el Dashboard, Reporte y Alertas.
+- **Estética Y2K / webcore "pixel"** con paleta rosa pastel (`webcore.css`) para Dashboard, Reporte y Alertas — ahora con **fondo hacker rosa neón dinámico**.
 - **Bootstrap 5** tradicional para los formularios de Solicitud y Detalle.
 
 ---
@@ -61,7 +61,7 @@ zonafranca/
 ├── public/                   # Páginas HTML (frontend estático)
 │   ├── index.html            # Dashboard de solicitudes de admisión
 │   ├── reporte.html           # Formulario de reporte trimestral
-│   ├── alertas.html           # Panel de alertas de cumplimiento (referido)
+│   ├── alertas.html           # Panel de alertas de cumplimiento (creado)
 │   ├── solicitud.html         # Formulario de nueva solicitud (Bootstrap)
 │   ├── detalle-solicitud.html # Detalle + evaluación IA de una solicitud
 │   ├── favicon.svg
@@ -124,7 +124,7 @@ Muestra el detalle de una solicitud y la evaluación de IA:
 - Filtros por nivel, vista de detalle y **exportación PROCOMER** (descarga un archivo `.txt` de simulación).
 
 ### 6. Páginas auxiliares del proyecto base (plantilla Vite)
-`src/main.js`, `src/counter.js`, `src/style.css`, `src/pages/i.html` y `ii.html` provienen de la plantilla inicial de Vite y no forman parte funcional de la lógica de negocio.
+`src/main.js`, `src/counter.js`, `src/style.css`, `src/pages/i.html` y `ii.html` provienen de la plantilla inicial de Vite y no forman parte funcional de la lógica de negocio. → **Eliminados en la limpieza de duplicados.**
 
 ---
 
@@ -199,7 +199,7 @@ El servidor de datos se alimenta de `src/db.json` y expone colecciones REST en `
 | `/zonasFrancas` | GET/POST | Registro de zonas francas con criterios de admisión |
 | `/reportesCumplimiento` | GET/POST | Reportes trimestrales de cumplimiento (inversión real, empleos, exportaciones) |
 
-**⚠️ Estado del archivo `db.json`:** el archivo presenta **conflictos de fusión pendientes** de resolución (marcadores `<<<<<<< HEAD`, `=======`, `>>>>>>> 0a18a9abc…`). Contiene dos estructuras de datos coexistentes (un esquema de admisión/supervisión con historial por empresa, y un esquema estilo json-server con `empresas`, `zonasFrancas`, `solicitudes`, `zonas`) que deberían consolidarse antes de producción.
+**✅ Estado del archivo `db.json`:** consolidado (esquema funcional unificado: `solicitudes`, `empresas`, `zonasFrancas`, `reportesCumplimiento`), sin marcadores de conflicto.
 
 ---
 
@@ -233,8 +233,9 @@ El servidor de datos se alimenta de `src/db.json` y expone colecciones REST en `
 - **Servidor requerido:** el frontend consulta `http://localhost:3001`; sin json-server en ejecución, las páginas muestran errores de conexión (mensajes amigables).
 - **Sin autenticación:** el sistema es un prototipo/demostración para la gestión de zonas francas; no incluye login, roles ni permisos.
 - **Export PROCOMER:** la exportación es una **simulación** que genera un archivo `.txt` de texto plano (`downloadProcomerExport`).
-- **Doble esquema de datos:** conviene unificar `db.json` para evitar duplicidades y conflictos de fusión.
-- **Archivos duplicados:** existen copias en la raíz del directorio de trabajo (`index.html`) y dentro de `node_modules`; la fuente de verdad del proyecto es la carpeta `zonafranca/`.
+- **Base de datos consolidada:** `db.json` quedó unificado en un solo esquema funcional.
+- **Duplicados eliminados:** se removieron las copias en la raíz del directorio de trabajo (`index.html`, `package-lock.json`) y los archivos vacíos/de plantilla (`i.html`, `ii.html`, `main.js`, `counter.js`, `style.css`, `vite.svg`, `javascript.svg`); la fuente de verdad del proyecto es la carpeta `zonafranca/`.
+- **Fondo neon dinámico (hacker):** `src/js/neon-bg.js` añade lluvia de código en rosa neón; `webcore.css` incorpora el tema **NEON HACKER** (rejilla animada, scanlines CRT, glow). `alertas.html` fue creado y `detalle.js` (página de detalle IA) fue implementado.
 
 ---
 

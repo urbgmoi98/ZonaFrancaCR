@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD:src/db.json
   "solicitudes": [
     {
       "id": 1,
@@ -117,7 +116,8 @@
         { "tipo": "score-ia", "fecha": "2025-05-19", "descripcion": "Score IA 68/100: cumple umbrales mínimos.", "estado": "Evaluado" },
         { "tipo": "decision", "fecha": "2025-05-28", "descripcion": "Aprobada con condiciones de reporte trimestral estricto.", "estado": "Aprobada" }
       ]
-=======
+    }
+  ],
   "zonasFrancas": [
     {
       "id": 1,
@@ -201,52 +201,8 @@
     }
     
   ],
-  "solicitudes": [
-    {
-      "id": 1001,
-      "empresaId": 101,
-      "zonaFrancaId": 1,
-      "tipoSolicitud": "Admisión",
-      "fechaPresentacion": "2021-01-20",
-      "estado": "Aprobada",
-      "descripcion": "Solicitud de ingreso como usuario operador de la Zona Franca de Bogotá.",
-      "numeroResolucion": "RES-2021-045"
-    },
-    {
-      "id": 1002,
-      "empresaId": 102,
-      "zonaFrancaId": 2,
-      "tipoSolicitud": "Beneficio Tributario",
-      "fechaPresentacion": "2026-07-10",
-      "estado": "En Revisión",
-      "descripcion": "Solicitud de extensión de beneficio de IVA para importación de maquinaria especializada.",
-      "numeroResolucion": null
-    },
-    {
-      "id": 1003,
-      "empresaId": 103,
-      "zonaFrancaId": 3,
-      "tipoSolicitud": "Ampliación",
-      "fechaPresentacion": "2026-08-05",
-      "estado": "Pendiente",
-      "descripcion": "Solicitud para ampliar el área operativa en 5,000 m2 dentro de la zona franca.",
-      "numeroResolucion": null
-    },
-    {
-      "id": 1004,
-      "empresaId": 101,
-      "zonaFrancaId": 1,
-      "tipoSolicitud": "Exportación",
-      "fechaPresentacion": "2026-08-18",
-      "estado": "Rechazada",
-      "descripcion": "Permiso para exportar mercancía ensamblada hacia Estados Unidos sin certificado de origen.",
-      "numeroResolucion": "RES-2026-188"
->>>>>>> 0a18a9abc10d2e4de21a6a2ec2990f62d51ee56a:zonafranca/src/db.json
-    }
-  ],
   "reportesCumplimiento": [
     {
-<<<<<<< HEAD:src/db.json
       "id": 1,
       "empresaId": 1,
       "empresa": "BioMedica CR S.A.",
@@ -371,45 +327,6 @@
       "fechaEnvio": null,
       "recibido": false,
       "notas": "ROJO — reporte no presentado al día 25 post-trimestre."
-=======
-      "id": 2001,
-      "empresaId": 101,
-      "zonaFrancaId": 1,
-      "periodo": "2026-Q1",
-      "fechaPresentacion": "2026-04-10",
-      "estado": "Aprobado",
-      "exportacionesUSD": 2500000,
-      "importacionesUSD": 1200000,
-      "empleosGenerados": 85,
-      "inversionUSD": 500000,
-      "observaciones": "Cumple satisfactoriamente con las metas de inversión pactadas."
-    },
-    {
-      "id": 2002,
-      "empresaId": 102,
-      "zonaFrancaId": 2,
-      "periodo": "2026-Q1",
-      "fechaPresentacion": "2026-04-15",
-      "estado": "Radicado",
-      "exportacionesUSD": 850000,
-      "importacionesUSD": 2100000,
-      "empleosGenerados": 42,
-      "inversionUSD": 120000,
-      "observaciones": "Pendiente de revisión documental por parte de la DIAN."
-    },
-    {
-      "id": 2003,
-      "empresaId": 101,
-      "zonaFrancaId": 1,
-      "periodo": "2025-Q4",
-      "fechaPresentacion": "2026-01-20",
-      "estado": "Aprobado",
-      "exportacionesUSD": 3200000,
-      "importacionesUSD": 1400000,
-      "empleosGenerados": 80,
-      "inversionUSD": 750000,
-      "observaciones": "Reporte sin observaciones. Renovación automática de beneficios."
->>>>>>> 0a18a9abc10d2e4de21a6a2ec2990f62d51ee56a:zonafranca/src/db.json
     }
   ]
 }
